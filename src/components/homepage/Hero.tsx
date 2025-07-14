@@ -38,6 +38,9 @@ export function Hero() {
                 priority
               />
             </div>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2">
+              Fermanis & Sons Lawncare
+            </h1>
             <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-green-600">
               Family Trust. Professional Results.
             </h2>
