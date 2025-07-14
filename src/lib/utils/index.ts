@@ -2,4 +2,7 @@
 export * from './formatting'
 
 // Pricing utilities
-export * from './pricing' 
+export * from './pricing'
+
+// Service data
+export * from '../data' 

@@ -12,7 +12,7 @@ Fermanis & Sons Lawncare is a family-operated lawn care business that needs a pr
 
 ### The Market Opportunity
 - **Local residential focus**: Target homeowners who value family businesses and personalized service
-- **Service differentiation**: Emphasize quality products (Anderson, PGF) and family expertise
+- **Service differentiation**: Emphasize quality professional-grade products and family expertise
 - **Seasonal demand**: Capitalize on spring/summer lawn care peaks with effective online presence
 - **Growth potential**: Scale from neighborhood operation to broader service area coverage
 
@@ -71,7 +71,7 @@ Fermanis & Sons Lawncare is a family-operated lawn care business that needs a pr
 
 #### For Customers
 - **Family Trust**: Personal service from a family business
-- **Quality Products**: Professional-grade Anderson and PGF treatments
+- **Quality Products**: Professional-grade specialized treatments
 - **Convenience**: Easy online booking and communication
 - **Transparency**: Clear pricing and service descriptions
 - **Reliability**: Consistent service with personal accountability

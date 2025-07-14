@@ -1,4 +1,11 @@
 /**
+ * Combines class names with proper handling of conditionals
+ */
+export const cn = (...classes: (string | undefined | false)[]): string => {
+  return classes.filter(Boolean).join(' ')
+}
+
+/**
  * Formats a number as currency (USD)
  */
 export const formatCurrency = (amount: number): string => {

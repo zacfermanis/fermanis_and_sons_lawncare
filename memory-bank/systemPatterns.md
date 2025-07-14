@@ -286,9 +286,9 @@ const getServices = (): Service[] => {
     {
       id: "soil-boost",
       name: "Soil & Health Boost",
-      description: "Anderson products for healthier lawn",
+      description: "Professional products for healthier lawn",
       price: 50,
-      features: ["Anderson Dirt Booster Plus", "PGF Complete", "Dark Green Lawn"],
+      features: ["Advanced soil health treatment", "Complete nutrient formula", "Premium color enhancement"],
       icon: "fertilizer",
     },
     // More services...
