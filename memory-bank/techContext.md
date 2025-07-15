@@ -23,23 +23,24 @@
 ```json
 {
   "dependencies": {
-    "next": "^14.0.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "@emotion/react": "^11.0.0",
-    "@emotion/styled": "^11.0.0",
-    "zod": "^3.22.0"
+    "next": "^15.3.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "resend": "^4.6.0",
+    "zod": "^4.0.5"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "jest": "^29.0.0",
-    "@testing-library/react": "^14.0.0",
-    "@testing-library/jest-dom": "^6.0.0",
-    "@testing-library/user-event": "^14.0.0",
-    "eslint": "^8.0.0",
-    "prettier": "^3.0.0"
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/node": "^20.0.0",
+    "jest": "^30.0.4",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/user-event": "^14.6.1",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "15.3.5",
+    "tailwindcss": "^4.0.0"
   }
 }
 ```
@@ -253,19 +254,11 @@ npm run build
 ```bash
 # .env.local (local development)
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
-CONTACT_EMAIL=info@fermanislawncare.com
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your-email@gmail.com
-SMTP_PASS=your-app-password
+RESEND_API_KEY=re_your_api_key_here
 
 # .env.production (production)
-NEXT_PUBLIC_SITE_URL=https://fermanislawncare.com
-CONTACT_EMAIL=info@fermanislawncare.com
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your-email@gmail.com
-SMTP_PASS=your-app-password
+NEXT_PUBLIC_SITE_URL=https://fermanisandsonslawncare.com
+RESEND_API_KEY=re_your_production_api_key_here
 ```
 
 ## Development Standards
@@ -298,9 +291,12 @@ refactor: extract service pricing logic
 
 ## Third-Party Integrations
 
-### Email Service
-- **SMTP**: Gmail SMTP for quote request notifications
-- **Alternative**: SendGrid or Mailgun for production scaling
+### Email Service ✅ (Implemented)
+- **Resend**: Modern email API for quote request notifications and customer confirmations
+- **Features**: Professional HTML templates, reliable delivery, comprehensive error handling
+- **Status**: Fully implemented and tested with successful email delivery
+- **Configuration**: API key-based authentication with environment variables
+- **Alternative**: SendGrid or Mailgun for alternative email services
 
 ### Analytics (Future)
 - **Google Analytics**: Track user behavior and conversions

@@ -231,7 +231,68 @@ const ServiceCard = ({ service }: ServiceCardProps): JSX.Element => {
 
 ## Data Flow Patterns
 
-### 1. Server Actions for Form Submission
+### 1. Email Integration Pattern ✅ (Implemented)
+```typescript
+// API Route for Quote Requests with Email Integration
+import { NextRequest, NextResponse } from 'next/server'
+import { Resend } from 'resend'
+import { QuoteRequestSchema, type QuoteRequest } from '../lib/schemas/quote'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json()
+    
+    // Validate request data
+    const result = QuoteRequestSchema.safeParse(body)
+    if (!result.success) {
+      return NextResponse.json(
+        { error: 'Invalid form data', details: result.error.issues },
+        { status: 400 }
+      )
+    }
+
+    const quoteData: QuoteRequest = result.data
+    
+    // Create professional email content
+    const emailContent = createEmailContent(quoteData, selectedServices)
+    
+    // Send business notification
+    const businessEmail = await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: ['zacfermanis@gmail.com'], // Testing mode
+      subject: `New Quote Request from ${quoteData.customerName}`,
+      html: emailContent.businessEmail,
+    })
+
+    // Send customer confirmation
+    const customerEmail = await resend.emails.send({
+      from: 'onboarding@resend.dev', 
+      to: ['zacfermanis@gmail.com'], // Testing mode
+      subject: 'Your Quote Request - Fermanis & Sons Lawncare',
+      html: emailContent.customerEmail,
+    })
+
+    return NextResponse.json({ 
+      success: true, 
+      message: 'Quote request submitted successfully',
+      debug: {
+        businessEmailId: businessEmail.data?.id,
+        customerEmailId: customerEmail.data?.id
+      }
+    })
+
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Failed to process quote request' },
+      { status: 500 }
+    )
+  }
+}
+```
+
+### 2. Server Actions for Form Submission
 ```typescript
 "use server";
 
@@ -270,7 +331,63 @@ const submitQuoteRequest = async (
 };
 ```
 
-### 2. Static Data Generation
+### 2. Email Template Generation Pattern ✅ (Implemented)
+```typescript
+// Professional email template creation
+function createEmailContent(quoteData: QuoteRequest, selectedServices: Service[]) {
+  const businessEmail = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .header { background: #22c55e; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; }
+        .urgent { background: #fef2f2; border-left: 4px solid #ef4444; padding: 10px; }
+      </style>
+    </head>
+    <body>
+      <div class="header">
+        <h1>New Quote Request</h1>
+        <p>Fermanis & Sons Lawncare</p>
+      </div>
+      <div class="content">
+        ${quoteData.urgency === 'asap' ? '<div class="urgent">🚨 URGENT REQUEST - ASAP Service Needed</div>' : ''}
+        <h2>Customer Information</h2>
+        <p><strong>Name:</strong> ${quoteData.customerName}</p>
+        <p><strong>Email:</strong> ${quoteData.email}</p>
+        <p><strong>Phone:</strong> ${quoteData.phone}</p>
+        <!-- Additional customer details -->
+      </div>
+    </body>
+    </html>
+  `;
+
+  const customerEmail = `
+    <!DOCTYPE html>
+    <html>
+    <body>
+      <div class="header">
+        <h1>Thank You for Your Quote Request!</h1>
+        <p>Fermanis & Sons Lawncare</p>
+      </div>
+      <div class="content">
+        <p>Hi ${quoteData.customerName},</p>
+        <p>Thank you for choosing Fermanis & Sons Lawncare! We've received your quote request...</p>
+        <h3>Why Choose Fermanis & Sons?</h3>
+        <p>🏠 <strong>Family-Operated:</strong> Teaching our sons work ethic and quality service</p>
+        <p>🌱 <strong>Professional-Grade:</strong> We use only the best products for superior results</p>
+        <p>📍 <strong>Local Focus:</strong> Dedicated to serving the 12 Oaks neighborhood</p>
+      </div>
+    </body>
+    </html>
+  `;
+
+  return { businessEmail, customerEmail };
+}
+```
+
+### 3. Static Data Generation
 ```typescript
 // Service data with static generation
 const getServices = (): Service[] => {

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '../ui/Button'
 import { cn } from '../../lib/utils/formatting'
 
@@ -48,9 +49,14 @@ export function Header() {
           {/* Logo and business name */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">F&S</span>
-              </div>
+              <Image
+                src="/FermanisAndSonsLogo_transparent.png"
+                alt="Fermanis & Sons Lawncare Logo"
+                width={40}
+                height={40}
+                className="w-10 h-10 object-contain"
+                priority
+              />
               <div>
                 <h1 className="text-xl font-bold text-gray-900">Fermanis & Sons Lawncare</h1>
                 <p className="text-sm text-gray-600">Father and sons working together</p>
