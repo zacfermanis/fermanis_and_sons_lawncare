@@ -3,6 +3,14 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { Hero } from './Hero'
 
+// Mock useRouter
+const mockPush = jest.fn()
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: mockPush
+  })
+}))
+
 describe('Hero Component', () => {
   describe('Business Identity', () => {
     it('renders the business name prominently', () => {

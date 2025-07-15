@@ -30,7 +30,7 @@ src/
 
 #### 1. Server-First Architecture
 - **Server Components**: Default for all pages and components
-- **Client Components**: Only for interactive elements (forms, mobile menu)
+- **Client Components**: Only for interactive elements (forms, mobile menu, navigation)
 - **Static Generation**: Pre-render service pages and content
 - **SEO Optimization**: Server-side rendering for search engines
 
@@ -75,6 +75,30 @@ const QuoteRequestSchema = z.object({
 type QuoteRequest = z.infer<typeof QuoteRequestSchema>;
 ```
 
+#### 4. Navigation Pattern ✅ (Implemented)
+```typescript
+// Consistent navigation pattern across all components
+import { useRouter } from 'next/navigation'
+
+const ComponentWithNavigation = (): JSX.Element => {
+  const router = useRouter()
+  
+  const handleGetQuote = () => {
+    router.push('/quote')
+  }
+  
+  const handleGetQuoteWithService = (serviceId: string) => {
+    router.push(`/quote?service=${serviceId}`)
+  }
+  
+  return (
+    <Button onClick={handleGetQuote}>
+      Get Quote
+    </Button>
+  )
+}
+```
+
 ## Key Technical Decisions
 
 ### 1. TypeScript Strict Mode
@@ -110,7 +134,37 @@ const updateQuoteRequest = (
 };
 ```
 
-### 3. Form Handling Pattern
+### 3. Navigation and Router Patterns ✅ (Recently Implemented)
+```typescript
+// Standard router implementation pattern
+'use client'
+
+import React from 'react'
+import { useRouter } from 'next/navigation'
+import { Button } from '../ui/Button'
+
+export function ComponentWithQuoteButton() {
+  const router = useRouter()
+  
+  const handleGetQuote = () => {
+    router.push('/quote')
+  }
+  
+  const handleGetQuoteWithContext = (serviceId: string) => {
+    router.push(`/quote?service=${serviceId}`)
+  }
+  
+  return (
+    <div>
+      <Button onClick={handleGetQuote}>
+        Get Quote
+      </Button>
+    </div>
+  )
+}
+```
+
+### 4. Form Handling Pattern
 ```typescript
 // Form with validation and error handling
 const QuoteForm = (): JSX.Element => {
@@ -191,6 +245,7 @@ const Button = ({
   variant = "primary", 
   size = "medium", 
   children, 
+  onClick,
   ...props 
 }: ButtonProps): JSX.Element => {
   return (
@@ -201,6 +256,7 @@ const Button = ({
         `btn-${size}`,
         props.className
       )}
+      onClick={onClick}
       {...props}
     >
       {children}
@@ -222,11 +278,119 @@ const ServiceCard = ({ service }: ServiceCardProps): JSX.Element => {
       </CardContent>
       <CardFooter>
         <PriceDisplay price={service.price} />
-        <Button variant="primary">Get Quote</Button>
+        <Button variant="primary" onClick={handleGetQuote}>
+          Get Quote
+        </Button>
       </CardFooter>
     </Card>
   );
 };
+```
+
+### 3. Navigation Components ✅ (Implementation Pattern)
+```typescript
+// Header component with quote button navigation
+'use client'
+
+import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Button } from '../ui/Button'
+
+export function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const router = useRouter()
+
+  const handleGetQuote = () => {
+    router.push('/quote')
+  }
+
+  return (
+    <header>
+      {/* Desktop Quote Button */}
+      <Button
+        variant="primary"
+        size="sm"
+        className="hidden sm:inline-flex"
+        onClick={handleGetQuote}
+      >
+        Get Quote
+      </Button>
+      
+      {/* Mobile Quote Button */}
+      <Button
+        variant="primary"
+        size="sm"
+        fullWidth
+        onClick={() => {
+          setIsMobileMenuOpen(false)
+          handleGetQuote()
+        }}
+      >
+        Get Quote
+      </Button>
+    </header>
+  );
+};
+```
+
+## Testing Patterns
+
+### 1. Router Mocking Pattern ✅ (Established)
+```typescript
+// Standard router mock for components using useRouter
+import React from 'react'
+import { render, screen, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { ComponentWithRouter } from './ComponentWithRouter'
+
+// Mock useRouter
+const mockPush = jest.fn()
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: mockPush
+  })
+}))
+
+describe('ComponentWithRouter', () => {
+  beforeEach(() => {
+    mockPush.mockClear()
+  })
+
+  it('should navigate to quote page when button is clicked', () => {
+    render(<ComponentWithRouter />)
+    
+    const quoteButton = screen.getByRole('button', { name: /get quote/i })
+    fireEvent.click(quoteButton)
+    
+    expect(mockPush).toHaveBeenCalledWith('/quote')
+  })
+})
+```
+
+### 2. Component Testing Pattern
+```typescript
+// Testing pattern for UI components
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { Button } from './Button'
+
+describe('Button Component', () => {
+  it('should render with correct variant styles', () => {
+    render(<Button variant="primary">Click Me</Button>)
+    
+    const button = screen.getByRole('button', { name: /click me/i })
+    expect(button).toHaveClass('btn-primary')
+  })
+  
+  it('should call onClick handler when clicked', () => {
+    const mockClick = jest.fn()
+    render(<Button onClick={mockClick}>Click Me</Button>)
+    
+    fireEvent.click(screen.getByRole('button'))
+    expect(mockClick).toHaveBeenCalledTimes(1)
+  })
+})
 ```
 
 ## Data Flow Patterns
@@ -248,42 +412,37 @@ export async function POST(request: NextRequest) {
     const result = QuoteRequestSchema.safeParse(body)
     if (!result.success) {
       return NextResponse.json(
-        { error: 'Invalid form data', details: result.error.issues },
+        { error: 'Invalid request data', details: result.error.issues },
         { status: 400 }
       )
     }
 
-    const quoteData: QuoteRequest = result.data
-    
-    // Create professional email content
-    const emailContent = createEmailContent(quoteData, selectedServices)
-    
-    // Send business notification
+    const quoteRequest: QuoteRequest = result.data
+
+    // Send business notification email
     const businessEmail = await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: ['zacfermanis@gmail.com'], // Testing mode
-      subject: `New Quote Request from ${quoteData.customerName}`,
-      html: emailContent.businessEmail,
+      from: 'quotes@fermanisandsonslawncare.com',
+      to: 'business@fermanisandsonslawncare.com',
+      subject: `New Quote Request from ${quoteRequest.customerName}`,
+      html: generateBusinessEmailTemplate(quoteRequest)
     })
 
-    // Send customer confirmation
+    // Send customer confirmation email
     const customerEmail = await resend.emails.send({
-      from: 'onboarding@resend.dev', 
-      to: ['zacfermanis@gmail.com'], // Testing mode
-      subject: 'Your Quote Request - Fermanis & Sons Lawncare',
-      html: emailContent.customerEmail,
+      from: 'noreply@fermanisandsonslawncare.com',
+      to: quoteRequest.email,
+      subject: 'Quote Request Received - Fermanis & Sons Lawncare',
+      html: generateCustomerEmailTemplate(quoteRequest)
     })
 
-    return NextResponse.json({ 
-      success: true, 
-      message: 'Quote request submitted successfully',
-      debug: {
-        businessEmailId: businessEmail.data?.id,
-        customerEmailId: customerEmail.data?.id
-      }
+    return NextResponse.json({
+      success: true,
+      businessEmailId: businessEmail.data?.id,
+      customerEmailId: customerEmail.data?.id
     })
 
   } catch (error) {
+    console.error('Quote request error:', error)
     return NextResponse.json(
       { error: 'Failed to process quote request' },
       { status: 500 }
@@ -292,256 +451,31 @@ export async function POST(request: NextRequest) {
 }
 ```
 
-### 2. Server Actions for Form Submission
+## Critical Implementation Notes
+
+### Navigation System Requirements ✅
+**Essential for all quote-related components:**
+1. **useRouter Import**: Always import from 'next/navigation'
+2. **Router Instance**: Call useRouter() hook in component
+3. **onClick Handlers**: Implement proper navigation functions
+4. **Testing**: Add router mocks to all test files
+
+### Components with Navigation ✅
+- **Header.tsx**: Desktop and mobile quote buttons
+- **Hero.tsx**: Main CTA "Get Quote" button  
+- **ServiceOverview.tsx**: "Get Free Quote" and "Learn More" buttons
+- **Service Pages**: Service-specific quote buttons
+- **Service Detail Pages**: Quote buttons with service context
+
+### Testing Requirements ✅
+**Router mock must be added to test files for any component using useRouter:**
 ```typescript
-"use server";
-
-const submitQuoteRequest = async (
-  formData: FormData
-): Promise<ActionResult> => {
-  const rawData = {
-    customerName: formData.get("customerName"),
-    email: formData.get("email"),
-    phone: formData.get("phone"),
-    serviceType: formData.get("serviceType"),
-    propertySize: formData.get("propertySize"),
-    message: formData.get("message"),
-  };
-
-  const validationResult = QuoteRequestSchema.safeParse(rawData);
-  
-  if (!validationResult.success) {
-    return {
-      success: false,
-      errors: formatZodErrors(validationResult.error),
-    };
-  }
-
-  try {
-    await sendQuoteRequestEmail(validationResult.data);
-    await saveQuoteRequest(validationResult.data);
-    
-    return { success: true };
-  } catch (error) {
-    return {
-      success: false,
-      error: "Failed to submit quote request. Please try again.",
-    };
-  }
-};
+const mockPush = jest.fn()
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: mockPush
+  })
+}))
 ```
 
-### 2. Email Template Generation Pattern ✅ (Implemented)
-```typescript
-// Professional email template creation
-function createEmailContent(quoteData: QuoteRequest, selectedServices: Service[]) {
-  const businessEmail = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .header { background: #22c55e; color: white; padding: 20px; text-align: center; }
-        .content { padding: 20px; }
-        .urgent { background: #fef2f2; border-left: 4px solid #ef4444; padding: 10px; }
-      </style>
-    </head>
-    <body>
-      <div class="header">
-        <h1>New Quote Request</h1>
-        <p>Fermanis & Sons Lawncare</p>
-      </div>
-      <div class="content">
-        ${quoteData.urgency === 'asap' ? '<div class="urgent">🚨 URGENT REQUEST - ASAP Service Needed</div>' : ''}
-        <h2>Customer Information</h2>
-        <p><strong>Name:</strong> ${quoteData.customerName}</p>
-        <p><strong>Email:</strong> ${quoteData.email}</p>
-        <p><strong>Phone:</strong> ${quoteData.phone}</p>
-        <!-- Additional customer details -->
-      </div>
-    </body>
-    </html>
-  `;
-
-  const customerEmail = `
-    <!DOCTYPE html>
-    <html>
-    <body>
-      <div class="header">
-        <h1>Thank You for Your Quote Request!</h1>
-        <p>Fermanis & Sons Lawncare</p>
-      </div>
-      <div class="content">
-        <p>Hi ${quoteData.customerName},</p>
-        <p>Thank you for choosing Fermanis & Sons Lawncare! We've received your quote request...</p>
-        <h3>Why Choose Fermanis & Sons?</h3>
-        <p>🏠 <strong>Family-Operated:</strong> Teaching our sons work ethic and quality service</p>
-        <p>🌱 <strong>Professional-Grade:</strong> We use only the best products for superior results</p>
-        <p>📍 <strong>Local Focus:</strong> Dedicated to serving the 12 Oaks neighborhood</p>
-      </div>
-    </body>
-    </html>
-  `;
-
-  return { businessEmail, customerEmail };
-}
-```
-
-### 3. Static Data Generation
-```typescript
-// Service data with static generation
-const getServices = (): Service[] => {
-  return [
-    {
-      id: "basic-mowing",
-      name: "Basic Lawn Mowing",
-      description: "Weekly or biweekly cutting with edge trimming",
-      price: 35,
-      features: ["Professional cutting", "Edge trimming", "Debris cleanup"],
-      icon: "lawn-mower",
-    },
-    {
-      id: "soil-boost",
-      name: "Soil & Health Boost",
-      description: "Professional products for healthier lawn",
-      price: 50,
-      features: ["Advanced soil health treatment", "Complete nutrient formula", "Premium color enhancement"],
-      icon: "fertilizer",
-    },
-    // More services...
-  ];
-};
-
-// Static generation for service pages
-export const generateStaticParams = (): { slug: string }[] => {
-  const services = getServices();
-  return services.map(service => ({ slug: service.id }));
-};
-```
-
-## Error Handling Patterns
-
-### 1. Form Validation Errors
-```typescript
-type FormErrors = Record<string, string>;
-
-const formatZodErrors = (error: ZodError): FormErrors => {
-  return error.errors.reduce((acc, err) => {
-    const path = err.path.join(".");
-    acc[path] = err.message;
-    return acc;
-  }, {} as FormErrors);
-};
-```
-
-### 2. API Error Handling
-```typescript
-type ActionResult = 
-  | { success: true; data?: unknown }
-  | { success: false; error?: string; errors?: FormErrors };
-
-const handleApiError = (error: unknown): ActionResult => {
-  if (error instanceof ZodError) {
-    return {
-      success: false,
-      errors: formatZodErrors(error),
-    };
-  }
-
-  return {
-    success: false,
-    error: "An unexpected error occurred. Please try again.",
-  };
-};
-```
-
-## Testing Patterns
-
-### 1. Component Testing
-```typescript
-// Test user behavior, not implementation
-describe("QuoteForm", () => {
-  it("should submit valid quote request", async () => {
-    const mockSubmit = jest.fn();
-    render(<QuoteForm onSubmit={mockSubmit} />);
-
-    await userEvent.type(screen.getByLabelText("Name"), "John Doe");
-    await userEvent.type(screen.getByLabelText("Email"), "john@example.com");
-    await userEvent.type(screen.getByLabelText("Phone"), "1234567890");
-    await userEvent.click(screen.getByRole("button", { name: "Get Quote" }));
-
-    expect(mockSubmit).toHaveBeenCalledWith({
-      customerName: "John Doe",
-      email: "john@example.com",
-      phone: "1234567890",
-      serviceType: "basic",
-      propertySize: "medium",
-    });
-  });
-});
-```
-
-### 2. Integration Testing
-```typescript
-// Test complete user journeys
-describe("Quote Request Flow", () => {
-  it("should complete quote request from service page", async () => {
-    render(<ServicePage serviceId="basic-mowing" />);
-
-    // Navigate to quote form
-    await userEvent.click(screen.getByRole("button", { name: "Get Quote" }));
-
-    // Fill form
-    await userEvent.type(screen.getByLabelText("Name"), "Jane Smith");
-    await userEvent.type(screen.getByLabelText("Email"), "jane@example.com");
-    await userEvent.type(screen.getByLabelText("Phone"), "9876543210");
-    
-    // Submit
-    await userEvent.click(screen.getByRole("button", { name: "Submit Quote" }));
-
-    // Verify success
-    expect(screen.getByText("Thank you for your quote request!")).toBeInTheDocument();
-  });
-});
-```
-
-## Performance Patterns
-
-### 1. Image Optimization
-```typescript
-// Optimized image component
-const OptimizedImage = ({ 
-  src, 
-  alt, 
-  width, 
-  height 
-}: OptimizedImageProps): JSX.Element => {
-  return (
-    <Image
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      loading="lazy"
-      placeholder="blur"
-      blurDataURL="data:image/jpeg;base64,..."
-    />
-  );
-};
-```
-
-### 2. Code Splitting
-```typescript
-// Dynamic imports for non-critical components
-const PhotoGallery = dynamic(
-  () => import("../components/PhotoGallery"),
-  { loading: () => <GalleryLoader /> }
-);
-
-const ContactForm = dynamic(
-  () => import("../components/ContactForm"),
-  { ssr: false }
-);
-```
-
-This architecture ensures the website is fast, maintainable, and scalable while following best practices for TypeScript, React, and Next.js development. 
+This pattern ensures consistent navigation behavior and prevents test failures when components use Next.js router functionality. 

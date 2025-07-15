@@ -1,19 +1,20 @@
 'use client'
 
 import React from 'react'
+import { useRouter } from 'next/navigation'
 import { Button } from '../ui/Button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/Card'
 import { SERVICES } from '../../lib/data/services'
 
 export function ServiceOverview() {
+  const router = useRouter()
+  
   const handleGetQuote = () => {
-    // Navigation to quote page would go here
-    console.log('Navigate to quote page')
+    router.push('/quote')
   }
 
   const handleLearnMore = (serviceId: string) => {
-    // Navigation to service detail page would go here
-    console.log(`Navigate to service: ${serviceId}`)
+    router.push(`/services/${serviceId}`)
   }
 
   return (

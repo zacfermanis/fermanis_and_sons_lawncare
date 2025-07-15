@@ -1,5 +1,15 @@
+import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { Header } from './Header'
+
+// Mock useRouter
+const mockPush = jest.fn()
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: mockPush
+  })
+}))
 
 describe('Header Component', () => {
   describe('Business Branding', () => {

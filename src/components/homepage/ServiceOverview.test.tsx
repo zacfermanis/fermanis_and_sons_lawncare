@@ -3,6 +3,14 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { ServiceOverview } from './ServiceOverview'
 
+// Mock useRouter
+const mockPush = jest.fn()
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: mockPush
+  })
+}))
+
 describe('ServiceOverview Component', () => {
   describe('Section Structure', () => {
     it('renders the section heading', () => {

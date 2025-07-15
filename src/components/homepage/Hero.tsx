@@ -2,13 +2,15 @@
 
 import React from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { Button } from '../ui/Button'
 import { Card, CardContent } from '../ui/Card'
 
 export function Hero() {
+  const router = useRouter()
+  
   const handleGetQuote = () => {
-    // Navigation to quote page would go here
-    console.log('Navigate to quote page')
+    router.push('/quote')
   }
 
   const handleCallNow = () => {

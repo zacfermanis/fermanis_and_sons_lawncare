@@ -5,12 +5,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '../ui/Button'
 import { cn } from '../../lib/utils/formatting'
+import { useRouter } from 'next/navigation'
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const router = useRouter()
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
+  const handleGetQuote = () => {
+    router.push('/quote')
   }
 
   const navigationLinks = [
@@ -87,6 +93,7 @@ export function Header() {
               variant="primary"
               size="sm"
               className="hidden sm:inline-flex"
+              onClick={handleGetQuote}
             >
               Get Quote
             </Button>
@@ -139,7 +146,10 @@ export function Header() {
                 variant="primary"
                 size="sm"
                 fullWidth
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  handleGetQuote()
+                }}
               >
                 Get Quote
               </Button>
