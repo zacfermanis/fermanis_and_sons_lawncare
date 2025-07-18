@@ -35,7 +35,10 @@ export const getBasePrice = (serviceType: ServiceType, propertySize: PropertySiz
  * Calculates the total price for add-on services
  */
 export const calculateAddOnPrice = (addOns: AddOnService[]): number => {
-  return addOns.reduce((total, addOn) => total + addOn.price, 0)
+  return addOns.reduce((total, addOn) => {
+    const price = typeof addOn.price === 'string' ? parseFloat(addOn.price) || 0 : addOn.price
+    return total + price
+  }, 0)
 }
 
 /**
@@ -56,9 +59,10 @@ export const createPriceBreakdown = (
   ]
 
   addOns.forEach(addOn => {
+    const price = typeof addOn.price === 'string' ? parseFloat(addOn.price) || 0 : addOn.price
     breakdown.push({
       item: addOn.name,
-      price: addOn.price,
+      price,
       description: addOn.description,
     })
   })
