@@ -34,15 +34,12 @@ export function Hero() {
               <Image
                 src="/FermanisAndSonsLogo_transparent.png"
                 alt="Fermanis & Sons Lawncare Logo"
-                width={200}
-                height={200}
-                className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain"
+                width={300}
+                height={300}
+                className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 object-contain"
                 priority
               />
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2">
-              Fermanis & Sons Lawncare
-            </h1>
             <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-green-600">
               Family Trust. Professional Results.
             </h2>

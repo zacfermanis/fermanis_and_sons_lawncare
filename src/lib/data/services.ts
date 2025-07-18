@@ -4,11 +4,13 @@ export const SERVICES: Service[] = [
   {
     id: 'lawn-mowing',
     name: 'Lawn Mowing',
-    description: 'Regular, clean cuts using sharp blades to maintain a healthy and even lawn. Includes full mow of front, back, and side yards with patterned mowing available if requested. Clippings can be mulched or bagged depending on lawn needs.',
-    shortDescription: 'Regular, clean cuts using sharp blades for healthy, even lawn',
+    description: 'Professional reel mower cuts that provide clean, precise trimming without damaging your grass. Unlike rotary mowers that tear and rip grass, our reel mowers create healthy, even cuts that promote strong growth. Includes full mow of front, back, and side yards with patterned mowing available if requested. Clippings can be mulched or bagged depending on lawn needs.',
+    shortDescription: 'Professional reel mower cuts for healthy, undamaged grass',
     price: 'Contact for pricing',
     priceNote: 'Pricing based on lawn size and frequency',
     features: [
+      'Professional reel mower technology - no rotary rip damage',
+      'Clean, precise cuts that promote healthy grass growth',
       'Full mow of front, back, and side yards',
       'Patterned mowing available if requested',
       'Clippings mulched or bagged based on lawn needs',

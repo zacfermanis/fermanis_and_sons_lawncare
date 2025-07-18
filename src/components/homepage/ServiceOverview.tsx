@@ -133,7 +133,7 @@ export function ServiceOverview() {
           <div className="text-center p-6 bg-white rounded-lg shadow-sm">
             <h4 className="font-semibold text-gray-900 mb-2">Lawn Maintenance</h4>
             <p className="text-sm text-gray-600">
-              Weekly mowing, weedwacking, and edging for a pristine lawn
+              Professional reel mower cuts, weedwacking, and edging for a pristine lawn
             </p>
           </div>
           
