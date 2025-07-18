@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { useRouter, useParams } from 'next/navigation'
+import Image from 'next/image'
 import { Button } from '../../../components/ui/Button'
 import { ServiceCard } from '../../../components/ui/ServiceCard'
 import { getServiceById, getServicesByCategory } from '../../../lib/data/services'
@@ -104,6 +105,73 @@ export default function ServiceDetailPage() {
                     Our father and sons team brings personal attention and pride to every job.
                   </p>
                 </div>
+
+                {service.id === 'lawn-mowing' && (
+                  <>
+                    <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg mb-6">
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div className="ml-3">
+                          <p className="text-sm font-semibold text-red-800">
+                            Stop Rotary Rip! We only use reel mowers for a professional cut.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Mowing Comparison */}
+                    <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+                      <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">
+                        See the Difference: Rotary Rip vs. Professional Reel Mowing
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Bad - Rotary Rip */}
+                        <div className="text-center">
+                          <div className="relative mb-4">
+                            <Image
+                              src="/rotary_rip2.jpg"
+                              alt="Rotary mower damage - torn and ripped grass"
+                              width={300}
+                              height={200}
+                              className="w-full h-48 object-cover rounded-lg border-2 border-red-300"
+                            />
+                            <div className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                              AVOID
+                            </div>
+                          </div>
+                          <h4 className="font-semibold text-red-600 mb-2">Rotary Rip Damage</h4>
+                          <p className="text-sm text-gray-600">
+                            Torn, ripped grass that damages your lawn and creates an uneven, unhealthy appearance.
+                          </p>
+                        </div>
+
+                        {/* Good - Reel Mowing */}
+                        <div className="text-center">
+                          <div className="relative mb-4">
+                            <Image
+                              src="/lawn_1.jpg"
+                              alt="Professional reel mower cut - clean and healthy grass"
+                              width={300}
+                              height={200}
+                              className="w-full h-48 object-cover rounded-lg border-2 border-green-300"
+                            />
+                            <div className="absolute top-2 left-2 bg-green-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                              CHOOSE
+                            </div>
+                          </div>
+                          <h4 className="font-semibold text-green-600 mb-2">Professional Reel Cut</h4>
+                          <p className="text-sm text-gray-600">
+                            Clean, precise cuts that promote healthy grass growth and create a professional appearance.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
 
                 {service.category === 'treatments' && (
                   <div className="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6">
