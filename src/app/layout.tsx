@@ -17,6 +17,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Fermanis & Sons Lawncare - 12 Oaks Holly Springs",
   description: "Professional lawn care services in 12 Oaks neighborhood of Holly Springs. Family-operated business using premium professional-grade products for lawn mowing, treatments, and landscaping.",
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
