@@ -65,7 +65,6 @@ export function Header() {
               />
               <div>
                 <h1 className="text-xl font-bold text-gray-900">Fermanis & Sons Lawncare</h1>
-                <p className="text-sm text-gray-600">Father and sons working together</p>
               </div>
             </Link>
           </div>
