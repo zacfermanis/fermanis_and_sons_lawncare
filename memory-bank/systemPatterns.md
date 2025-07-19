@@ -11,10 +11,10 @@ src/
 │   ├── layout.tsx         # Root layout with navigation
 │   ├── page.tsx           # Homepage
 │   ├── services/          # Service pages
-│   ├── gallery/           # Photo gallery
-│   ├── about/             # Family story
-│   ├── quote/             # Quote request
-│   └── contact/           # Contact information
+│   ├── about/             # Family story page
+│   ├── contact/           # Contact page with simple form
+│   ├── quote/             # Quote request form
+│   └── api/               # API routes
 ├── components/            # Reusable UI components
 │   ├── forms/            # Form components
 │   ├── ui/               # Basic UI elements
@@ -466,6 +466,8 @@ export async function POST(request: NextRequest) {
 - **ServiceOverview.tsx**: "Get Free Quote" and "Learn More" buttons
 - **Service Pages**: Service-specific quote buttons
 - **Service Detail Pages**: Quote buttons with service context
+- **About Page**: Quote buttons and service navigation
+- **Contact Page**: Quote redirect and service navigation
 
 ### Testing Requirements ✅
 **Router mock must be added to test files for any component using useRouter:**
@@ -477,5 +479,11 @@ jest.mock('next/navigation', () => ({
   })
 }))
 ```
+
+**Page Testing Pattern:**
+- All pages should have comprehensive test suites
+- Test content rendering, form functionality, and navigation
+- Verify proper metadata and SEO elements
+- Test responsive design elements where applicable
 
 This pattern ensures consistent navigation behavior and prevents test failures when components use Next.js router functionality. 
