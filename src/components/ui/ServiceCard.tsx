@@ -69,12 +69,13 @@ export function ServiceCard({
       variant={isDetailed ? "elevated" : "default"}
       className={cn(
         isDetailed ? 'bg-green-50 border-green-200' : 'bg-white',
+        'flex flex-col h-full',
         className
       )}
     >
-      <CardHeader>
+      <CardHeader className="flex-shrink-0">
         <div className="flex items-start justify-between">
-          <div className="space-y-2">
+          <div className="space-y-1">
             <CardTitle className="text-lg sm:text-xl font-semibold text-gray-900">
               {service.name}
             </CardTitle>
@@ -100,19 +101,20 @@ export function ServiceCard({
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-4">
-        <p className="text-gray-600 text-sm sm:text-base">
-          {service.shortDescription}
-        </p>
+      <CardContent className="flex flex-col flex-grow space-y-3">
+        <div className="h-12 flex items-start">
+          <p className="text-gray-600 text-sm sm:text-base">
+            {service.shortDescription}
+          </p>
+        </div>
 
-        {/* Features List */}
-        <div className="space-y-2">
+        <div className="flex-grow space-y-1">
           <h4 className="text-sm font-medium text-gray-900">Key Features:</h4>
-          <ul className="space-y-1">
+          <ul className="space-y-0.5 min-h-[100px]">
             {featuresToShow.map((feature, index) => (
               <li key={index} className="text-sm text-gray-600 flex items-start">
-                <span className="text-green-600 mr-2">✓</span>
-                {feature}
+                <span className="text-green-600 mr-2 flex-shrink-0">✓</span>
+                <span>{feature}</span>
               </li>
             ))}
           </ul>
@@ -123,8 +125,7 @@ export function ServiceCard({
           )}
         </div>
 
-        {/* Pricing */}
-        <div className="space-y-1">
+        <div className="space-y-1 flex-shrink-0">
           <p className="text-lg font-semibold text-green-600">
             {service.price}
           </p>
@@ -135,8 +136,7 @@ export function ServiceCard({
           )}
         </div>
 
-        {/* Business Emphasis */}
-        <div className="bg-gradient-to-r from-green-50 to-blue-50 p-3 rounded-lg border border-green-100">
+        <div className="bg-gradient-to-r from-green-50 to-blue-50 p-2 rounded-lg border border-green-100 flex-shrink-0">
           <p className="text-xs text-gray-700">
             <strong>Family-operated quality</strong> serving the{' '}
             <strong>12 Oaks neighborhood</strong> with professional-grade products
@@ -144,7 +144,7 @@ export function ServiceCard({
         </div>
       </CardContent>
 
-      <CardFooter className="flex flex-col sm:flex-row gap-2">
+      <CardFooter className="flex flex-col sm:flex-row gap-2 flex-shrink-0">
         <Button
           variant="primary"
           size="sm"

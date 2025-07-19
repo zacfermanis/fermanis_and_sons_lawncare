@@ -99,6 +99,48 @@ const ComponentWithNavigation = (): JSX.Element => {
 }
 ```
 
+#### 5. Service Card Layout Pattern ✅ (Recently Implemented)
+```typescript
+// Uniform service card layout with flexbox for consistent alignment
+const ServiceCard = ({ service }: { service: Service }): JSX.Element => {
+  return (
+    <Card className="flex flex-col h-full">
+      <CardHeader className="flex-shrink-0">
+        {/* Fixed header content */}
+      </CardHeader>
+      
+      <CardContent className="flex flex-col flex-grow space-y-3">
+        {/* Description with fixed height */}
+        <div className="h-12 flex items-start">
+          <p>{service.shortDescription}</p>
+        </div>
+        
+        {/* Features with uniform height */}
+        <div className="flex-grow space-y-1">
+          <h4>Key Features:</h4>
+          <ul className="space-y-0.5 min-h-[100px]">
+            {/* Feature list with consistent spacing */}
+          </ul>
+        </div>
+        
+        {/* Fixed position elements */}
+        <div className="space-y-1 flex-shrink-0">
+          {/* Pricing section */}
+        </div>
+        
+        <div className="flex-shrink-0">
+          {/* Business emphasis section */}
+        </div>
+      </CardContent>
+      
+      <CardFooter className="flex-shrink-0">
+        {/* Fixed position buttons */}
+      </CardFooter>
+    </Card>
+  )
+}
+```
+
 ## Key Technical Decisions
 
 ### 1. TypeScript Strict Mode

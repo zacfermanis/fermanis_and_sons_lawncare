@@ -129,7 +129,7 @@ export default function ServicesPage() {
           </div>
           <div 
             data-testid="services-grid"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center"
           >
             {maintenanceServices.map((service) => (
               <ServiceCard
@@ -154,7 +154,7 @@ export default function ServicesPage() {
               Advanced soil health and lawn nutrition using premium professional-grade products
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
             {treatmentServices.map((service) => (
               <ServiceCard
                 key={service.id}
@@ -178,7 +178,7 @@ export default function ServicesPage() {
               Professional landscaping for enhanced curb appeal and property value
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
             {landscapingServices.map((service) => (
               <ServiceCard
                 key={service.id}
@@ -202,7 +202,7 @@ export default function ServicesPage() {
               Seasonal and post-maintenance cleanup for a pristine property
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
             {cleanupServices.map((service) => (
               <ServiceCard
                 key={service.id}
