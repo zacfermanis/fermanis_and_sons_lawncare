@@ -102,8 +102,6 @@ export function QuoteForm() {
         throw new Error(errorData.error || 'Failed to submit quote request')
       }
 
-      const result = await response.json()
-      
       setIsSubmitted(true)
       
       // Reset form after successful submission
