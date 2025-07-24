@@ -168,7 +168,7 @@ describe('Header Component', () => {
 
     it('should highlight family story', () => {
       render(<Header />)
-      const familyStory = screen.getByText(/father.*sons/i)
+      const familyStory = screen.getByText(/Family-operated lawn care/i)
       expect(familyStory).toBeInTheDocument()
     })
   })

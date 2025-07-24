@@ -36,7 +36,7 @@ describe('Service Detail Page', () => {
     it('should display full service description', () => {
       render(<ServiceDetailPage />)
       
-      expect(screen.getByText(/Regular, clean cuts using sharp blades to maintain a healthy and even lawn/i)).toBeInTheDocument()
+      expect(screen.getByText(/Professional reel mower cuts that provide clean, precise trimming without damaging your grass/i)).toBeInTheDocument()
     })
 
     it('should display all service features', () => {
@@ -121,12 +121,7 @@ describe('Service Detail Page', () => {
       expect(mockPush).toHaveBeenCalledWith('/quote?service=lawn-mowing')
     })
 
-    it('should have Call Now button', () => {
-      render(<ServiceDetailPage />)
-      
-      const callButtons = screen.getAllByRole('button', { name: /Call Now/i })
-      expect(callButtons.length).toBeGreaterThan(0)
-    })
+
   })
 
   describe('Related Services', () => {

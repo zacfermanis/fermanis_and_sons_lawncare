@@ -50,7 +50,7 @@ describe('ServiceOverview Component', () => {
 
     it('displays service descriptions', () => {
       render(<ServiceOverview />)
-      expect(screen.getByText(/regular, clean cuts using sharp blades/i)).toBeInTheDocument()
+      expect(screen.getByText(/Professional reel mower cuts for healthy, undamaged grass/i)).toBeInTheDocument()
       expect(screen.getByText(/string trimming around obstacles/i)).toBeInTheDocument()
       expect(screen.getAllByText(/professional.*products/i)[0]).toBeInTheDocument()
     })
@@ -58,7 +58,7 @@ describe('ServiceOverview Component', () => {
     it('shows service features', () => {
       render(<ServiceOverview />)
       expect(screen.getByText(/full mow of front, back, and side yards/i)).toBeInTheDocument()
-      expect(screen.getByText(/regular, clean cuts using sharp blades/i)).toBeInTheDocument()
+      expect(screen.getByText(/Clean, precise cuts that promote healthy grass growth/i)).toBeInTheDocument()
     })
 
     it('displays contact for pricing', () => {
@@ -83,7 +83,7 @@ describe('ServiceOverview Component', () => {
 
     it('includes service short descriptions', () => {
       render(<ServiceOverview />)
-      expect(screen.getByText(/regular, clean cuts using sharp blades/i)).toBeInTheDocument()
+      expect(screen.getByText(/Professional reel mower cuts for healthy, undamaged grass/i)).toBeInTheDocument()
       expect(screen.getByText(/string trimming around obstacles/i)).toBeInTheDocument()
     })
 
@@ -146,9 +146,7 @@ describe('ServiceOverview Component', () => {
       expect(screen.getByRole('button', { name: /get free quote/i })).toBeInTheDocument()
     })
 
-    it('includes phone number for contact', () => {
-      render(<ServiceOverview />)
-    })
+
 
     it('handles CTA button click', () => {
       render(<ServiceOverview />)

@@ -28,14 +28,18 @@ export function QuoteForm() {
   const [errors, setErrors] = useState<FormErrors>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [hasInitializedFromUrl, setHasInitializedFromUrl] = useState(false)
 
   // Pre-fill service type if coming from a specific service page
   useEffect(() => {
-    const serviceParam = searchParams.get('service')
-    if (serviceParam) {
-      setFormData(prev => ({ ...prev, serviceType: 'basic' }))
+    if (!hasInitializedFromUrl) {
+      const serviceParam = searchParams.get('service')
+      if (serviceParam) {
+        setFormData(prev => ({ ...prev, serviceType: 'basic' }))
+      }
+      setHasInitializedFromUrl(true)
     }
-  }, [searchParams])
+  }, [hasInitializedFromUrl])
 
   const handleInputChange = (field: keyof QuoteRequest, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
@@ -99,7 +103,6 @@ export function QuoteForm() {
       }
 
       const result = await response.json()
-      console.log('Quote request submitted successfully:', result)
       
       setIsSubmitted(true)
       

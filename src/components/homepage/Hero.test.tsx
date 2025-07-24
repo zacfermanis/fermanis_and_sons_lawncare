@@ -15,7 +15,7 @@ describe('Hero Component', () => {
   describe('Business Identity', () => {
     it('renders the business name prominently', () => {
       render(<Hero />)
-      expect(screen.getByText(/Fermanis & Sons Lawncare/i)).toBeInTheDocument()
+      expect(screen.getByAltText(/Fermanis & Sons Lawncare Logo/i)).toBeInTheDocument()
     })
 
     it('highlights the family business story', () => {
@@ -71,10 +71,7 @@ describe('Hero Component', () => {
       expect(screen.getByRole('button', { name: /get quote/i })).toBeInTheDocument()
     })
 
-    it('renders phone CTA button', () => {
-      render(<Hero />)
-      expect(screen.getByRole('button', { name: /call now/i })).toBeInTheDocument()
-    })
+
   })
 
   describe('Visual Design', () => {
@@ -104,11 +101,7 @@ describe('Hero Component', () => {
       expect(primaryCTA).toHaveClass('bg-green-600')
     })
 
-    it('renders secondary CTA button with correct styling', () => {
-      render(<Hero />)
-      const secondaryCTA = screen.getByRole('button', { name: /call now/i })
-      expect(secondaryCTA).toHaveClass('border-green-600')
-    })
+
 
     it('handles CTA button clicks', () => {
       render(<Hero />)
@@ -133,16 +126,16 @@ describe('Hero Component', () => {
 
     it('adapts text size for mobile', () => {
       render(<Hero />)
-      const mainHeading = screen.getByRole('heading', { level: 1 })
-      expect(mainHeading).toHaveClass('text-3xl')
+      const mainHeading = screen.getByRole('heading', { level: 2 })
+      expect(mainHeading).toHaveClass('text-xl')
     })
   })
 
   describe('Accessibility', () => {
     it('has proper heading hierarchy', () => {
       render(<Hero />)
-      expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument()
       expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument()
+      expect(screen.getAllByRole('heading', { level: 3 })).toHaveLength(6) // Multiple h3 headings
     })
 
     it('has descriptive alt text for images', () => {

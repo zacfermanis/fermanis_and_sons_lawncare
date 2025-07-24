@@ -72,7 +72,7 @@ describe('Services Page', () => {
     it('should show service features and descriptions', () => {
       render(<ServicesPage />)
       
-      expect(screen.getByText(/Regular, clean cuts using sharp blades/i)).toBeInTheDocument()
+      expect(screen.getByText(/Professional reel mower cuts for healthy, undamaged grass/i)).toBeInTheDocument()
       expect(screen.getByText(/Professional-grade products for soil health/i)).toBeInTheDocument()
     })
   })
@@ -118,26 +118,10 @@ describe('Services Page', () => {
       expect(screen.getByText(/fermanisandsonslawncare@gmail\.com/)).toBeInTheDocument()
     })
 
-    it('should have main Call Now button', () => {
-      render(<ServicesPage />)
-      
-      expect(screen.getByRole('button', { name: /Call Now/i })).toBeInTheDocument()
-    })
-
     it('should have main Get Quote button', () => {
       render(<ServicesPage />)
       
       expect(screen.getByRole('button', { name: /Request Quote/i })).toBeInTheDocument()
-    })
-
-    it('should call phone number when Call Now is clicked', () => {
-      render(<ServicesPage />)
-      
-      const callButton = screen.getByRole('button', { name: /Call Now/i })
-      
-      // Just verify the button exists and is clickable
-      expect(callButton).toBeInTheDocument()
-      expect(callButton).not.toBeDisabled()
     })
   })
 

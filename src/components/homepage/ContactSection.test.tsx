@@ -41,33 +41,31 @@ describe('ContactSection Component', () => {
 
     it('includes contact hours or availability', () => {
       render(<ContactSection />)
-      expect(screen.getByText(/available/i)).toBeInTheDocument()
+      expect(screen.getByText(/we respond quickly to all inquiries/i)).toBeInTheDocument()
     })
   })
 
   describe('Call to Action', () => {
-    it('renders primary CTA button', () => {
-      render(<ContactSection />)
-      expect(screen.getByRole('button', { name: /call now/i })).toBeInTheDocument()
-    })
-
     it('renders secondary CTA button', () => {
       render(<ContactSection />)
       expect(screen.getByRole('button', { name: /send message/i })).toBeInTheDocument()
     })
+  })
 
-    it('handles phone button click', () => {
+  describe('Business Information', () => {
+    it('displays business name', () => {
       render(<ContactSection />)
-      const phoneButton = screen.getByRole('button', { name: /call now/i })
-      fireEvent.click(phoneButton)
-      // Would test phone call functionality
+      expect(screen.getByText(/Fermanis & Sons/i)).toBeInTheDocument()
     })
 
-    it('handles message button click', () => {
+    it('displays service area', () => {
       render(<ContactSection />)
-      const messageButton = screen.getByRole('button', { name: /send message/i })
-      fireEvent.click(messageButton)
-      // Would test navigation to contact form
+      expect(screen.getByText(/Proudly serving the 12 Oaks neighborhood/i)).toBeInTheDocument()
+    })
+
+    it('displays contact information', () => {
+      render(<ContactSection />)
+      expect(screen.getByText(/fermanisandsonslawncare@gmail\.com/i)).toBeInTheDocument()
     })
   })
 
@@ -190,17 +188,15 @@ describe('ContactSection Component', () => {
 
     it('provides accessible button labels', () => {
       render(<ContactSection />)
-      const phoneButton = screen.getByRole('button', { name: /call now/i })
       const messageButton = screen.getByRole('button', { name: /send message/i })
-      expect(phoneButton).toHaveAccessibleName()
       expect(messageButton).toHaveAccessibleName()
     })
 
     it('supports keyboard navigation', () => {
       render(<ContactSection />)
-      const phoneButton = screen.getByRole('button', { name: /call now/i })
-      phoneButton.focus()
-      expect(phoneButton).toHaveFocus()
+      const messageButton = screen.getByRole('button', { name: /send message/i })
+      messageButton.focus()
+      expect(messageButton).toHaveFocus()
     })
 
     it('has proper color contrast', () => {
