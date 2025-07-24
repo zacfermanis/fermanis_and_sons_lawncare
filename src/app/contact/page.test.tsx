@@ -46,7 +46,6 @@ describe('ContactPage', () => {
     render(<ContactPage />)
     
     expect(screen.getByText(/call us directly/i)).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /207-232-4106/i })).toHaveAttribute('href', 'tel:207-232-4106')
   })
 
   it('should display email contact information', () => {
@@ -96,7 +95,6 @@ describe('ContactPage', () => {
     
     expect(screen.getByText(/we typically respond to all messages within 24 hours/i)).toBeInTheDocument()
     expect(screen.getByText(/we currently focus on the 12 oaks neighborhood/i)).toBeInTheDocument()
-    expect(screen.getByText(/calling us directly at 207-232-4106 is the fastest way/i)).toBeInTheDocument()
     expect(screen.getByText(/we're happy to come out and discuss your lawn care needs/i)).toBeInTheDocument()
     expect(screen.getByText(/we can often accommodate urgent requests/i)).toBeInTheDocument()
     expect(screen.getByText(/include your address, the type of service you need/i)).toBeInTheDocument()

@@ -251,7 +251,6 @@ function createEmailContent(quoteData: QuoteRequest, selectedServices: Service[]
 
         <div class="section">
           <h3>Questions? Contact Us Anytime</h3>
-          <p><strong>Phone:</strong> 207-232-4106</p>
           <p><strong>Email:</strong> fermanisandsonslawncare@gmail.com</p>
         </div>
 

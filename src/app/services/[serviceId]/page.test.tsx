@@ -202,12 +202,6 @@ describe('Service Detail Page', () => {
       })
     })
 
-    it('should display contact phone number', () => {
-      render(<ServiceDetailPage />)
-      
-      expect(screen.getByText('207-232-4106')).toBeInTheDocument()
-    })
-
     it('should display contact email', () => {
       render(<ServiceDetailPage />)
       

@@ -28,11 +28,6 @@ describe('ContactSection Component', () => {
   })
 
   describe('Contact Information', () => {
-    it('displays the phone number prominently', () => {
-      render(<ContactSection />)
-      expect(screen.getByText(/207-232-4106/)).toBeInTheDocument()
-    })
-
     it('shows the email address', () => {
       render(<ContactSection />)
       expect(screen.getByText(/fermanisandsonslawncare@gmail.com/)).toBeInTheDocument()
@@ -122,12 +117,6 @@ describe('ContactSection Component', () => {
   })
 
   describe('Contact Methods', () => {
-    it('displays phone as primary contact method', () => {
-      render(<ContactSection />)
-      const phoneElement = screen.getByText(/207-232-4106/)
-      expect(phoneElement).toHaveClass('text-2xl')
-    })
-
     it('shows email as secondary contact method', () => {
       render(<ContactSection />)
       expect(screen.getByText(/fermanisandsonslawncare@gmail.com/)).toBeInTheDocument()

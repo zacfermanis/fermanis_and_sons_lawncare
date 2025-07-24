@@ -13,11 +13,6 @@ export function Hero() {
     router.push('/quote')
   }
 
-  const handleCallNow = () => {
-    // Phone call functionality would go here
-    window.location.href = 'tel:207-232-4106'
-  }
-
   return (
     <section 
       data-testid="hero-section"
@@ -170,9 +165,6 @@ export function Hero() {
               Serving 12 Oaks Neighborhood
             </h3>
             <div className="space-y-2 text-center">
-              <p className="text-lg font-medium text-green-600">
-                207-232-4106
-              </p>
               <p className="text-gray-600">
                 fermanisandsonslawncare@gmail.com
               </p>
@@ -191,14 +183,6 @@ export function Hero() {
               className="bg-green-600 hover:bg-green-700 text-white px-8 py-3"
             >
               Get Quote
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={handleCallNow}
-              className="border-green-600 text-green-600 hover:bg-green-50 px-8 py-3"
-            >
-              Call Now
             </Button>
           </div>
 

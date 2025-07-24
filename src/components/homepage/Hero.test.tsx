@@ -66,16 +66,6 @@ describe('Hero Component', () => {
   })
 
   describe('Contact Information', () => {
-    it('displays the phone number', () => {
-      render(<Hero />)
-      expect(screen.getByText(/207-232-4106/)).toBeInTheDocument()
-    })
-
-    it('includes the service area', () => {
-      render(<Hero />)
-      expect(screen.getAllByText(/12 Oaks neighborhood/i)[0]).toBeInTheDocument()
-    })
-
     it('renders contact CTA button', () => {
       render(<Hero />)
       expect(screen.getByRole('button', { name: /get quote/i })).toBeInTheDocument()

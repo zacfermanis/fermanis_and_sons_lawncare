@@ -18,10 +18,6 @@ export default function ServicesPage() {
     router.push(`/quote?service=${serviceId}`)
   }
 
-  const handleCallNow = () => {
-    window.location.href = 'tel:207-232-4106'
-  }
-
   const handleRequestQuote = () => {
     router.push('/quote')
   }
@@ -227,20 +223,11 @@ export default function ServicesPage() {
           
           <div className="space-y-4 mb-8">
             <div className="text-center">
-              <p className="text-xl font-semibold text-green-600">207-232-4106</p>
               <p className="text-gray-600">fermanisandsonslawncare@gmail.com</p>
             </div>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={handleCallNow}
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-3"
-            >
-              Call Now
-            </Button>
             <Button
               variant="outline"
               size="lg"

@@ -4,11 +4,6 @@ import React from 'react'
 import { Button } from '../ui/Button'
 
 export function ContactSection() {
-  const handleCallNow = () => {
-    // Phone call functionality
-    window.location.href = 'tel:207-232-4106'
-  }
-
   const handleSendMessage = () => {
     // Navigation to contact form or email
     window.location.href = 'mailto:fermanisandsonslawncare@gmail.com'
@@ -45,20 +40,6 @@ export function ContactSection() {
             <h3 className="text-xl font-semibold text-gray-900 mb-6">
               Contact Information
             </h3>
-            
-            {/* Phone */}
-            <div className="mb-6">
-              <div className="flex items-center mb-2">
-                <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-                <span className="text-sm font-medium text-gray-600">Call Us</span>
-              </div>
-              <p className="text-2xl font-bold text-green-600">
-                207-232-4106
-              </p>
-              <p className="text-sm text-gray-500 mt-1">
-                Available for calls and consultations
-              </p>
-            </div>
 
             {/* Email */}
             <div className="mb-6">
@@ -144,14 +125,6 @@ export function ContactSection() {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={handleCallNow}
-              className="bg-white text-green-600 hover:bg-green-50 px-8 py-3"
-            >
-              Call Now
-            </Button>
             <Button
               variant="outline"
               size="lg"

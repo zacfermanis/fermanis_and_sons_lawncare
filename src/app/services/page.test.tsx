@@ -115,7 +115,6 @@ describe('Services Page', () => {
     it('should display contact information prominently', () => {
       render(<ServicesPage />)
       
-      expect(screen.getByText(/207-232-4106/)).toBeInTheDocument()
       expect(screen.getByText(/fermanisandsonslawncare@gmail\.com/)).toBeInTheDocument()
     })
 

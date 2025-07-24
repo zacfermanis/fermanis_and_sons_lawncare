@@ -29,22 +29,11 @@ describe('Footer Component', () => {
   })
 
   describe('Contact Information', () => {
-    it('should display phone number', () => {
-      render(<Footer />)
-      const phoneNumber = screen.getByText(/207-232-4106/)
-      expect(phoneNumber).toBeInTheDocument()
-    })
 
     it('should display email address', () => {
       render(<Footer />)
       const email = screen.getByText(/fermanisandsonslawncare@gmail\.com/)
       expect(email).toBeInTheDocument()
-    })
-
-    it('should have clickable phone link', () => {
-      render(<Footer />)
-      const phoneLink = screen.getByRole('link', { name: /207-232-4106/ })
-      expect(phoneLink).toHaveAttribute('href', 'tel:207-232-4106')
     })
 
     it('should have clickable email link', () => {
@@ -178,10 +167,7 @@ describe('Footer Component', () => {
 
     it('should have accessible contact links', () => {
       render(<Footer />)
-      const phoneLink = screen.getByRole('link', { name: /207-232-4106/ })
       const emailLink = screen.getByRole('link', { name: /fermanisandsonslawncare@gmail\.com/ })
-      
-      expect(phoneLink).toBeInTheDocument()
       expect(emailLink).toBeInTheDocument()
     })
   })

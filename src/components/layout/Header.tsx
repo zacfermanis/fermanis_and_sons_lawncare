@@ -36,12 +36,7 @@ export function Header() {
               <span>Family-operated lawn care serving 12 Oaks, Holly Springs</span>
             </div>
             <div className="flex items-center space-x-4 mt-1 sm:mt-0">
-              <a
-                href="tel:207-232-4106"
-                className="hover:text-green-200 transition-colors"
-              >
-                📞 207-232-4106
-              </a>
+            
               <span className="text-green-200">|</span>
                               <span>Premium Professional Products</span>
             </div>

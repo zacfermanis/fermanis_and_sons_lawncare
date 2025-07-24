@@ -19,22 +19,10 @@ describe('Header Component', () => {
       expect(businessName).toBeInTheDocument()
     })
 
-    it('should display phone number', () => {
-      render(<Header />)
-      const phoneNumber = screen.getByText(/207-232-4106/)
-      expect(phoneNumber).toBeInTheDocument()
-    })
-
     it('should display service area', () => {
       render(<Header />)
       const serviceArea = screen.getByText(/12 Oaks/i)
       expect(serviceArea).toBeInTheDocument()
-    })
-
-    it('should have clickable phone link', () => {
-      render(<Header />)
-      const phoneLink = screen.getByRole('link', { name: /207-232-4106/i })
-      expect(phoneLink).toHaveAttribute('href', 'tel:207-232-4106')
     })
   })
 

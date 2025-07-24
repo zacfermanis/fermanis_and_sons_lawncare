@@ -132,12 +132,6 @@ export default function ContactPage() {
                         <p className="text-gray-600 mb-3">
                           Prefer to talk? Give us a call and we&apos;ll be happy to chat about your lawn care needs.
                         </p>
-                        <a
-                          href="tel:207-232-4106"
-                          className="text-2xl font-bold text-green-600 hover:text-green-700 transition-colors"
-                        >
-                          207-232-4106
-                        </a>
                       </div>
                     </div>
                   </div>
@@ -249,9 +243,6 @@ export default function ContactPage() {
                   <h3 className="text-lg font-bold text-gray-900 mb-2">
                     What if I have an urgent lawn care need?
                   </h3>
-                  <p className="text-gray-600">
-                    For urgent matters, calling us directly at 207-232-4106 is the fastest way to reach us.
-                  </p>
                 </div>
               </div>
               

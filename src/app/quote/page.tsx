@@ -64,9 +64,6 @@ export default function QuotePage() {
             Prefer to Talk Directly?
           </h3>
           <div className="space-y-2">
-            <p className="text-lg font-medium text-green-600">
-              Call us: 207-232-4106
-            </p>
             <p className="text-gray-600">
               Email: fermanisandsonslawncare@gmail.com
             </p>

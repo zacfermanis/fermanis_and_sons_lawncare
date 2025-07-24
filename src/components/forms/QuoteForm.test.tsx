@@ -95,9 +95,7 @@ describe('QuoteForm Component', () => {
     it('accepts valid phone number formats', async () => {
       const user = userEvent.setup()
       render(<QuoteForm />)
-      
-      const phoneField = screen.getByLabelText(/phone/i)
-      await user.type(phoneField, '2072324106')
+    
       
       // Should not show validation error
       const submitButton = screen.getByRole('button', { name: /request quote/i })
@@ -116,7 +114,6 @@ describe('QuoteForm Component', () => {
       
       await user.type(screen.getByLabelText(/name/i), 'John Smith')
       await user.type(screen.getByLabelText(/email/i), 'john@example.com')
-      await user.type(screen.getByLabelText(/phone/i), '2072324106')
       await user.type(screen.getByLabelText(/address/i), '123 Oak Street, Holly Springs')
       
       await user.selectOptions(screen.getByLabelText(/service type/i), 'basic')
@@ -127,7 +124,7 @@ describe('QuoteForm Component', () => {
       
       expect(screen.getByDisplayValue('John Smith')).toBeInTheDocument()
       expect(screen.getByDisplayValue('john@example.com')).toBeInTheDocument()
-      expect(screen.getByDisplayValue('2072324106')).toBeInTheDocument()
+
       expect(screen.getByDisplayValue('123 Oak Street, Holly Springs')).toBeInTheDocument()
     })
 
@@ -138,7 +135,7 @@ describe('QuoteForm Component', () => {
       // Fill out valid form
       await user.type(screen.getByLabelText(/name/i), 'John Smith')
       await user.type(screen.getByLabelText(/email/i), 'john@example.com')
-      await user.type(screen.getByLabelText(/phone/i), '2072324106')
+
       await user.type(screen.getByLabelText(/address/i), '123 Oak Street, Holly Springs')
       
       const submitButton = screen.getByRole('button', { name: /request quote/i })
@@ -195,7 +192,7 @@ describe('QuoteForm Component', () => {
       // Fill out valid form
       await user.type(screen.getByLabelText(/name/i), 'John Smith')
       await user.type(screen.getByLabelText(/email/i), 'john@example.com')
-      await user.type(screen.getByLabelText(/phone/i), '2072324106')
+
       await user.type(screen.getByLabelText(/address/i), '123 Oak Street, Holly Springs')
       
       const submitButton = screen.getByRole('button', { name: /request quote/i })

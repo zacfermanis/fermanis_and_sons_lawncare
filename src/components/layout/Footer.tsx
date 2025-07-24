@@ -34,12 +34,6 @@ export function Footer() {
               <p className="text-sm text-gray-400">Contact Us:</p>
               <div className="space-y-1">
                 <a 
-                  href="tel:207-232-4106" 
-                  className="block text-green-400 hover:text-green-300 transition-colors"
-                >
-                  📞 207-232-4106
-                </a>
-                <a 
                   href="mailto:fermanisandsonslawncare@gmail.com" 
                   className="block text-green-400 hover:text-green-300 transition-colors break-all"
                 >

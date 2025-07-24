@@ -22,9 +22,6 @@ export default function ServiceDetailPage() {
     router.push(`/quote?service=${serviceId}`)
   }
 
-  const handleCallNow = () => {
-    window.location.href = 'tel:207-232-4106'
-  }
 
   const handleRelatedServiceClick = (relatedServiceId: string) => {
     router.push(`/services/${relatedServiceId}`)
@@ -198,7 +195,6 @@ export default function ServiceDetailPage() {
               
               <div className="space-y-4 mb-6">
                 <div className="text-center">
-                  <p className="text-lg font-semibold text-green-600">207-232-4106</p>
                   <p className="text-gray-600 text-sm">fermanisandsonslawncare@gmail.com</p>
                   <p className="text-xs text-gray-500 mt-2">
                     Serving 12 Oaks neighborhood, Holly Springs, NC
@@ -214,14 +210,6 @@ export default function ServiceDetailPage() {
                   className="w-full bg-green-600 hover:bg-green-700 text-white"
                 >
                   Get Quote
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={handleCallNow}
-                  className="w-full border-green-600 text-green-600 hover:bg-green-50"
-                >
-                  Call Now
                 </Button>
               </div>
 
@@ -285,14 +273,6 @@ export default function ServiceDetailPage() {
               className="bg-green-600 hover:bg-green-700 text-white px-8 py-3"
             >
               Get Free Quote
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={handleCallNow}
-              className="border-green-600 text-green-600 hover:bg-green-50 px-8 py-3"
-            >
-              Call Now
             </Button>
           </div>
         </section>

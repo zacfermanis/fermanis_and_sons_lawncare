@@ -75,7 +75,6 @@
   - **Professional Treatments**: Soil & Lawn Treatments with premium products
   - **Landscaping Services**: Mulching, Hedge & Tree Trimming  
   - **Cleanup Services**: Leaf Blowing & Debris Cleanup, Manual Weeding
-- **Contact Information**: Phone (207-232-4106) and email prominently displayed
 - **Service Area**: 12 Oaks neighborhood of Holly Springs clearly highlighted
 - **Family Story**: Father and sons (13) story integrated throughout
 - **Professional Products**: Premium professional-grade products emphasized
@@ -137,7 +136,6 @@
 - Professional styling with focus states
 
 **Multiple Contact Methods**:
-- Phone Contact: Direct link to 207-232-4106 with call-to-action
 - Email Contact: Direct mailto link to business email
 - Service Area: Clear 12 Oaks neighborhood focus
 - Business Hours: After-school and weekend availability

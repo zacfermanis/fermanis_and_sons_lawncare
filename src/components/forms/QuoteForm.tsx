@@ -147,12 +147,6 @@ export function QuoteForm() {
              <li>• Contact you using your preferred method</li>
              <li>• Schedule a convenient time to discuss services</li>
           </ul>
-          
-          <div className="mt-6">
-            <p className="text-lg font-medium text-green-600">
-              Questions? Call us: 207-232-4106
-            </p>
-          </div>
         </div>
       </div>
     )
@@ -229,7 +223,6 @@ export function QuoteForm() {
             className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
               errors.phone ? 'border-red-500' : 'border-gray-300'
             }`}
-            placeholder="2072324106"
             maxLength={10}
             aria-required="true"
             aria-describedby={errors.phone ? 'phone-error' : undefined}

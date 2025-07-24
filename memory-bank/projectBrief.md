@@ -4,7 +4,7 @@
 
 **Business Name**: Fermanis & Sons Lawncare  
 **Service Area**: 12 Oaks neighborhood of Holly Springs  
-**Contact**: fermanisandsonslawncare@gmail.com | 207-232-4106  
+**Contact**: fermanisandsonslawncare@gmail.com 
 **Project Type**: Professional lawn care service website  
 **Target Launch**: TBD (to be determined with client)
 
@@ -28,7 +28,6 @@ Fermanis & Sons Lawncare is a family-operated lawn care business focused on the 
 
 ### Key Success Metrics
 - Contact form submissions and quote requests from 12 Oaks
-- Phone calls generated from website (207-232-4106)
 - Service booking conversions
 - Customer retention and neighborhood referrals
 - Local search visibility for "12 Oaks Holly Springs lawn care"
@@ -88,7 +87,6 @@ Fermanis & Sons Lawncare is a family-operated lawn care business focused on the 
 ### Core Features
 - **Service Pages**: Detailed descriptions for all 8 services
 - **Quote Request System**: Online form for service estimates
-- **Contact Information**: Phone (207-232-4106), email, service area
 - **Service Area Map**: 12 Oaks neighborhood coverage
 - **Family Story**: Father and two sons (13) working together
 - **Product Showcase**: Professional-grade products and premium tools
@@ -188,5 +186,4 @@ Following the development guide requirements:
 - Professional-grade products should be prominently featured for credibility
 - 12 Oaks neighborhood focus requires hyper-local SEO optimization
 - Before/after photos will be essential for service credibility
-- Contact information (207-232-4106) should be easily accessible
 - Email (fermanisandsonslawncare@gmail.com) for quote requests 

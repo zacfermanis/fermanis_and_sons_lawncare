@@ -97,10 +97,8 @@ describe('AboutPage', () => {
     render(<AboutPage />)
     
     const quoteButton = screen.getByRole('button', { name: /get your free quote/i })
-    const callButton = screen.getByRole('button', { name: /call us: 207-232-4106/i })
     
     expect(quoteButton).toBeInTheDocument()
-    expect(callButton).toBeInTheDocument()
   })
 
   it('should include the family story content', () => {

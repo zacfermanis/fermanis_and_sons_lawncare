@@ -120,9 +120,6 @@ export function ServiceOverview() {
               </Button>
               <div className="text-center">
                 <p className="text-sm text-gray-500">or call us directly</p>
-                <p className="text-lg font-semibold text-green-600">
-                  207-232-4106
-                </p>
               </div>
             </div>
           </div>

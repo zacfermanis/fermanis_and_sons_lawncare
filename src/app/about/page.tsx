@@ -280,9 +280,6 @@ export default function AboutPage() {
               <Button variant="primary" size="lg">
                 Get Your Free Quote
               </Button>
-              <Button variant="outline" size="lg">
-                Call Us: 207-232-4106
-              </Button>
             </div>
           </div>
         </div>
