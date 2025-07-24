@@ -39,7 +39,7 @@ export function QuoteForm() {
       }
       setHasInitializedFromUrl(true)
     }
-  }, [hasInitializedFromUrl])
+  }, [hasInitializedFromUrl, searchParams])
 
   const handleInputChange = (field: keyof QuoteRequest, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
